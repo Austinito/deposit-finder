@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LocationNode {
-    private String name;
-    protected Map<LocationNode, Integer> travelTimesToNeighbors;
+    private final String name;
+    protected final Map<LocationNode, Integer> travelTimesToNeighbors;
 
     public LocationNode(String name) {
         this.name = name;
@@ -21,6 +21,10 @@ public class LocationNode {
 
     public String getName() {
         return name;
+    }
+
+    public Map<LocationNode, Integer> getTravelTimesToNeighbors() {
+        return travelTimesToNeighbors;
     }
 
     // If Location Nodes have the same name, they are treated as if they are equal.
@@ -41,10 +45,5 @@ public class LocationNode {
     @Override
     public int hashCode() {
         return name.hashCode();
-    }
-
-
-    public Map<LocationNode, Integer> getTravelTimesToNeighbors() {
-        return travelTimesToNeighbors;
     }
 }
