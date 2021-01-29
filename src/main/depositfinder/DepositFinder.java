@@ -42,8 +42,6 @@ public class DepositFinder {
                 if (lineWords.length == EDGE_DEFINITION_NUM_WORDS) {
                     try {
                         graphController.defineAndAddEdge(lineWords);
-                    } catch (NumberFormatException e) {
-                        System.out.println("Error line " + lineNum + ": " + e.getMessage());
                     } catch (IllegalArgumentException e) {
                         System.out.println("Error line " + lineNum + ": " + e.getMessage());
                     }

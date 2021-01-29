@@ -22,8 +22,8 @@ public enum DepositLocation {
         return name;
     }
 
-    private static Map<String, DepositLocation> stringMap = Arrays.stream(values()).collect(Collectors.toMap(DepositLocation::getName, Function.identity()));
+    private static final Map<String, DepositLocation> STRING_MAP = Arrays.stream(values()).collect(Collectors.toMap(DepositLocation::getName, Function.identity()));
     public static DepositLocation fromString(String name) {
-        return stringMap.get(name);
+        return STRING_MAP.get(name);
     }
 }

@@ -22,7 +22,7 @@ class TravelTime {
      * @param value                     a positive integer value.
      * @throws IllegalArgumentException if value is negative or zero
      * @throws NumberFormatException    if value cannot be parsed by Integer class.
-     * @see                             <code>Integer.parseInt();</code>
+     * @see                             Integer#parseInt(String) parseInt
      */
     TravelTime(String value) throws IllegalArgumentException {
         this(Integer.parseInt(value));

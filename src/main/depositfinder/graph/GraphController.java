@@ -19,13 +19,13 @@ public class GraphController {
         depositLocationGraph = new DepositLocationGraph();
     }
 
-    public void defineAndAddEdge(String[] edgeInfo) throws IllegalArgumentException, NumberFormatException {
+    public void defineAndAddEdge(String[] edgeInfo) throws IllegalArgumentException {
         TravelTime travelTime;
         travelTime = new TravelTime(edgeInfo[2]);
 
         Optional<LocationNode> node1 = depositLocationGraph.getNode(edgeInfo[0]);
         Optional<LocationNode> node2 = depositLocationGraph.getNode(edgeInfo[1]);
-        if (!node1.isPresent()) {
+        if (node1.isEmpty()) {
             if (DepositLocation.fromString(edgeInfo[0]) != null) {
                 node1 = Optional.of(new DepositLocationNode(edgeInfo[0]));
             } else {
@@ -34,7 +34,7 @@ public class GraphController {
             depositLocationGraph.addNode(node1.get());
         }
 
-        if (!node2.isPresent()) {
+        if (node2.isEmpty()) {
             if (DepositLocation.fromString(edgeInfo[1]) != null) {
                 node2 = Optional.of(new DepositLocationNode(edgeInfo[1]));
             } else {
