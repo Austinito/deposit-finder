@@ -1,3 +1,6 @@
+/**
+ * DepositFinder is the root package for this application.
+ */
 package DepositFinder;
 
 import DepositFinder.graph.GraphController;
@@ -8,14 +11,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * DepositFinder is a console application that will parse the input of a file and return a path for each user
- * to the nearest deposit location and the total travel time to reach that destination. We accept a file
- * that will first define a bi-directional graph in which the nodes are waypoints or deposit locations, and
- * the edges are travel times. Deposit Locations are represented with "SB", "7E", "PTS", "CVS" or "FD". Afterwards,
- * the next section of input consists of app usernames followed by their current location.
+ * DepositFinder is this console application's entry class. This application will parse the input of a file
+ * and return a path for each user to the nearest deposit location and the total travel time to reach
+ * that destination. We accept a file that will first define a bi-directional graph in which the nodes are
+ * waypoints or deposit locations, and the edges are travel times. Deposit Locations are represented as follows:
+ * <ul> <li><code>SB</code></li> <li><code>7E</code></li> <li><code>PTS</code></li> <li><code>CVS</code></li>
+ * <li><code>FD</code></li> </ul>
+ * Afterwards, the next section of input consists of app usernames
+ * followed by their current location.
  * <p>
  * The program's output will print username followed by the route and total travel time.
- *
+ * @see DepositFinder.graph.DepositLocation
  * @author Austin Herrera
  */
 public class DepositFinder {
@@ -23,6 +29,10 @@ public class DepositFinder {
     private static final int USER_DEFINITION_NUM_WORDS = 2;
     private static final Logger LOGGER = Logger.getLogger(DepositFinder.class.getName());
 
+    /**
+     * Entry method of this application.
+     * @param args args contains only the input file.
+     */
     public static void main(String[] args) {
         if (args.length != 1) {
             System.out.println("Usage: java DepositFinder <input file>");

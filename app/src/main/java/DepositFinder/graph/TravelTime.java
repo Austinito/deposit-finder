@@ -2,7 +2,7 @@ package DepositFinder.graph;
 
 /**
  *  This class is used to enforce non-negative, non-zero travel times for
- *  paths between LocationNodes.
+ *  paths between <code>LocationNode</code>s.
  */
 class TravelTime {
     private final int value;

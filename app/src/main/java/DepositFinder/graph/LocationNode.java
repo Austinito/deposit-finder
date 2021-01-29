@@ -4,6 +4,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *  The <code>LocationNode</code> class represents a location with a name. A <code>LocationNode</code> is
+ *  able to keep a of map its own neighbors with its associated travel time.
+ *
+ * @see TravelTime
+ */
 public class LocationNode {
     private final String name;
     private final Map<LocationNode, Integer> travelTimesToNeighbors;
@@ -14,6 +20,7 @@ public class LocationNode {
     }
 
     /**
+     * Returns true if node was mapped as a new neighbor with the specified travel time.
      * @param node          the new adjacent node
      * @param travelTime    the travel time to adjacent node
      * @return              <code>true</code> if added;
@@ -35,7 +42,13 @@ public class LocationNode {
         return Collections.unmodifiableMap(travelTimesToNeighbors);
     }
 
-    // If Location Nodes have the same name, they are treated as if they are equal.
+    /**
+     * Compares this Location node to the specified object. The <code>LocationNodes</code> are considered
+     * equal if they have the same name.
+     * @param o The object to compare this <code>LocationNode</code> against
+     * @return  <code>true</code> if the given object represents a <code>LocationNode</code> with the same
+     *          name. <code>false</code> otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (o == this) {

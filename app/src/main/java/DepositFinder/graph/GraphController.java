@@ -10,6 +10,15 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ *  The <code>GraphController</code> class represents logical interactions between <code>DepositFinder</code>
+ *  and <code>DepositLocationGraph</code>. The controller will accept input from <code>DepositFinder</code>
+ *  and convert it to commands for the <code>DepositLocationGraph</code>. <code>GraphController</code> holds onto
+ *  information that <code>DepositFinder</code> would be interested in.
+ *
+ * @see DepositFinder.DepositFinder
+ * @see DepositLocationGraph
+ */
 public class GraphController {
     private static final Logger LOGGER = Logger.getLogger(GraphController.class.getName());
     private final Map<LocationNode, Deque<LocationNode>> routesToNearestDeposits;
