@@ -1,4 +1,4 @@
-package ah.depositfinder.graph;
+package main.depositfinder.graph;
 
 import java.util.ArrayList;
 import java.util.Deque;
@@ -20,10 +20,8 @@ public class GraphController {
     }
 
     public void defineAndAddEdge(String[] edgeInfo) throws IllegalArgumentException, NumberFormatException {
-        int travelTime = Integer.parseInt(edgeInfo[2]);
-        if (travelTime < 0) {
-            throw new IllegalArgumentException("Cannot add an edge with negative travel time.");
-        }
+        TravelTime travelTime;
+        travelTime = new TravelTime(edgeInfo[2]);
 
         Optional<LocationNode> node1 = depositLocationGraph.getNode(edgeInfo[0]);
         Optional<LocationNode> node2 = depositLocationGraph.getNode(edgeInfo[1]);
@@ -44,9 +42,8 @@ public class GraphController {
             }
             depositLocationGraph.addNode(node2.get());
         }
-
-        node1.get().addAdjacentLocation(node2.get(), travelTime);
-        node2.get().addAdjacentLocation(node1.get(), travelTime);
+        node1.get().addAdjacentLocation(node2.get(), travelTime.get());
+        node2.get().addAdjacentLocation(node1.get(), travelTime.get());
     }
 
     public int getTravelTimeToNearestDepositLocation(LocationNode origin) {
@@ -86,10 +83,13 @@ public class GraphController {
     }
 
 
-    // finds the minimum travel time from origin node to any deposit location
-    // and stores the route to take along with given travel time. This method
-    // uses Dijkstra's shortest path algorithm until it finds a deposit location
-    // and no shorter path exists.
+    /**
+     *  Finds the minimum travel time from origin node to any deposit location
+     *  and stores the route and travel time in @GraphController maps. Uses Dijkstra's
+     *  shortest path algorithm until it finds a deposit location
+     *  and no shorter paths exists.
+     * @param origin the origin location to find route from
+     */
     private void findRouteToNearestDepositLocation(LocationNode origin) {
         List<LocationNode> markedNodes = new ArrayList<>();
         Map<LocationNode, LocationNode> nodeParents = new HashMap<>();
@@ -135,7 +135,7 @@ public class GraphController {
             }
             markedNodes.add(closestUnmarkedNode);
 
-            // pick shortest path from map;
+            // pick closest location that has not been examined yet
             closestUnmarkedNode = getClosestUnmarkedNode(shortestTimesMap, markedNodes);
             if (closestUnmarkedNode != null) {
                 timeToClosestNode = shortestTimesMap.get(closestUnmarkedNode);

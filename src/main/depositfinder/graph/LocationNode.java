@@ -1,22 +1,30 @@
-package ah.depositfinder.graph;
+package main.depositfinder.graph;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LocationNode {
     private final String name;
-    protected final Map<LocationNode, Integer> travelTimesToNeighbors;
+    private final Map<LocationNode, Integer> travelTimesToNeighbors;
 
     public LocationNode(String name) {
         this.name = name;
         travelTimesToNeighbors = new HashMap<>();
     }
 
-    public void addAdjacentLocation(LocationNode node, int travelTime) {
+    /**
+     * @param node          the new adjacent node
+     * @param travelTime    the travel time to adjacent node
+     * @return              <code>true</code> if added;
+     *                      <code>false</code> if node already exists.
+     */
+    public boolean addAdjacentLocation(LocationNode node, int travelTime) {
         if (travelTimesToNeighbors.containsKey(node)) {
-            throw new IllegalArgumentException("Error: Cannot add another path where one already exists.");
+            return false;
         }
         travelTimesToNeighbors.put(node, travelTime);
+        return true;
     }
 
     public String getName() {
@@ -24,7 +32,7 @@ public class LocationNode {
     }
 
     public Map<LocationNode, Integer> getTravelTimesToNeighbors() {
-        return travelTimesToNeighbors;
+        return Collections.unmodifiableMap(travelTimesToNeighbors);
     }
 
     // If Location Nodes have the same name, they are treated as if they are equal.

@@ -1,10 +1,21 @@
-package ah.depositfinder;
+package main.depositfinder;
 
-import ah.depositfinder.graph.GraphController;
+import main.depositfinder.graph.GraphController;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * DepositFinder is a console application that will parse the input of a file and return a path for each user
+ * to the nearest deposit location and the total travel time to reach that destination. We accept a file
+ * that will first define a bi-directional graph in which the nodes are waypoints or deposit locations, and
+ * the edges are travel times. Deposit Locations are represented with "SB", "7E", "PTS", "CVS" or "FD". Afterwards,
+ * the next section of input consists of app usernames followed by their current location.
+ *
+ * The program's output will print username followed by the route and total travel time.
+ *
+ * @author Austin Herrera
+ */
 public class DepositFinder {
     private static final int EDGE_DEFINITION_NUM_WORDS = 3;
     private static final int USER_DEFINITION_NUM_WORDS = 2;
@@ -32,14 +43,14 @@ public class DepositFinder {
                     try {
                         graphController.defineAndAddEdge(lineWords);
                     } catch (NumberFormatException e) {
-                        System.out.println("Error: Could not parse travel time on line " + lineNum + " (skipped): " + inputLine);
+                        System.out.println("Error line " + lineNum + ": " + e.getMessage());
                     } catch (IllegalArgumentException e) {
-                        System.out.println("Error: " + e.getMessage() + " Line " + lineNum + " (skipped): " + inputLine);
+                        System.out.println("Error line " + lineNum + ": " + e.getMessage());
                     }
                 } else if (lineWords.length == USER_DEFINITION_NUM_WORDS) {
                     graphController.outputNearestRouteForUser(lineWords);
                 } else {
-                    System.out.println("Error: Could not parse line " + lineNum + " (skipped): " + inputLine);
+                    System.out.println("Error line " + lineNum + ": Incorrect amount of arguments.");
                 }
             }
             scanner.close();
